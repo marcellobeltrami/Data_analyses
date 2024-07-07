@@ -2,6 +2,8 @@ import pandas as pd
 import plotly.express as px
 from sklearn.manifold import TSNE
 from sklearn.cluster import DBSCAN, KMeans
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
 
 # Carries out tsne dim reduction
 def TSNE_reduction (df: pd.DataFrame, rng=42 ): 
@@ -38,3 +40,48 @@ def KMEANS_cluster(df: pd.DataFrame, clusters= 2 ,rng=42):
     df['cluster'] = kmeans_results.labels_
 
     return df
+
+# Carries out random forest regressor after splitting for training and testing
+def RF_train_test (preprocessed_df: pd.DataFrame, prediction_col:str, randomizer:str = None):
+        
+    X_train, X_test, y_train, y_test = train_test_split(preprocessed_df.drop(columns=prediction_col), 
+                                                    preprocessed_df[prediction_col], 
+                                                    test_size=0.2, 
+                                                    random_state=randomizer)
+    
+    rgrs = RandomForestRegressor()
+
+    fitted = rgrs.fit(X_train,y_train)
+
+    # Feature importances
+    importance_df = pd.DataFrame({
+        'Feature': X_train.columns,
+        'Importance': fitted.feature_importances_
+    })
+
+    return fitted.score(X_test,y_test), importance_df.sort_values(by="Importance")
+
+
+
+# Add another supervised algorithm
+def STR_train_test (preprocessed_df: pd.DataFrame, prediction_col:str, randomizer:str = None):
+        
+    X_train, X_test, y_train, y_test = train_test_split(preprocessed_df.drop(columns=prediction_col), 
+                                                    preprocessed_df[prediction_col], 
+                                                    test_size=0.2, 
+                                                    random_state=randomizer)
+    
+    '''
+    rgrs = ...insert algorthm
+
+    fitted = rgrs.fit(X_train,y_train)
+
+    # Feature importances
+    importance_df = pd.DataFrame({
+        'Feature': X_train.columns,
+        'Importance': fitted.feature_importances_
+    })
+
+    return (fitted.score(X_test,y_test), importance_df)
+    '''
+
