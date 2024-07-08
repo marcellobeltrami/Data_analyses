@@ -59,11 +59,11 @@ def RF_train_test (preprocessed_df: pd.DataFrame, prediction_col:str, randomizer
         'Importance': fitted.feature_importances_
     })
 
-    return fitted.score(X_test,y_test), importance_df.sort_values(by="Importance")
+    return fitted.score(X_test,y_test), importance_df.sort_values(by="Importance"), fitted
 
 
 
-# Add another supervised algorithm
+# Implement another supervised algorithm
 def STR_train_test (preprocessed_df: pd.DataFrame, prediction_col:str, randomizer:str = None):
         
     X_train, X_test, y_train, y_test = train_test_split(preprocessed_df.drop(columns=prediction_col), 
