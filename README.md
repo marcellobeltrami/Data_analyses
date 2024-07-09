@@ -7,7 +7,7 @@ Welcome to the project repository! This repository contains multiple projects wi
 - [Salaries Analysis](#salaries-analysis)
  
 
-### Breast Cancer Classification
+### Breast Cancer Classification 🧬
 
 This project aims to classify breast cancer data to determine whether a tumor is benign or malignant using various machine learning techniques.
 
@@ -15,7 +15,7 @@ This project aims to classify breast cancer data to determine whether a tumor is
 
 - **Data**: The dataset used in this project is stored in [data.csv](breast_cancer_classification/data.csv).
 
-### Salaries Analysis
+### Salaries Analysis 💰
 
 This project involves analyzing salary data and building predictive models to forecast salaries based on different factors.
 
@@ -27,5 +27,5 @@ This project involves analyzing salary data and building predictive models to fo
 
 - **Models storage** for built Neural Network models is located in the `temp/model` directory. Currently, it contains. The saved Keras model (.keras) for salary prediction. It is pretty small due to the reduced size of the dataset.
 
-### Author and License
+### Author and License 🧑‍🦱
 Marcello Beltrami, MIT License
