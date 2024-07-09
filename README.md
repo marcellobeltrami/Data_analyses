@@ -1,4 +1,4 @@
-# Project Repository
+# Kaggle Data Analysis
 
 Welcome to the project repository! This repository contains multiple projects with a focus on data analysis and machine learning. Below is an overview of the structure and contents of the repository.
 
@@ -25,7 +25,7 @@ This project involves analyzing salary data and building predictive models to fo
 
 - **Functions**: Reusable functions for data wrangling, plotting, and machine learning are stored in the `functions` directory. 
 
-- ** Models storage** for built Neural Network models is located in the `temp/model` directory. Currently, it contains. The saved Keras model (.keras) for salary prediction. It is pretty small due to the reduced size of the dataset.
+- **Models storage** for built Neural Network models is located in the `temp/model` directory. Currently, it contains. The saved Keras model (.keras) for salary prediction. It is pretty small due to the reduced size of the dataset.
 
 ### Author and License
 Marcello Beltrami, MIT License
