@@ -1,7 +1,8 @@
 import pandas as pd
 import plotly.express as px
 from sklearn.manifold import TSNE
-from sklearn.cluster import DBSCAN, KMeans
+from umap import UMAP
+from sklearn.cluster import DBSCAN, KMeans, AgglomerativeClustering
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 
@@ -19,6 +20,20 @@ def TSNE_reduction (df: pd.DataFrame, rng=42 ):
     fig.show()
 
     return df_tsne 
+
+def UMAP_reduction (df: pd.DataFrame, rng=42 ): 
+
+    umap = UMAP(n_components=2, random_state=rng)
+
+    # Apply t-SNE transformation to the DataFrame
+    umap_results = umap.fit_transform(df)
+    df_umap = pd.DataFrame(umap_results, columns=['umap1', 'umap2'])
+    
+    # Plots and ouputs figures 
+    fig = px.scatter(df_umap, x='umap1', y='umap2', title='UMAP Visualization')
+    fig.show()
+
+    return df_umap
 
 # Clusters using DBSCAN algorithm
 def DBSCAN_cluster(df: pd.DataFrame):
@@ -40,6 +55,18 @@ def KMEANS_cluster(df: pd.DataFrame, clusters= 2 ,rng=42):
     df['cluster'] = kmeans_results.labels_
 
     return df
+
+# Clusters using Agglomerative algorithm
+def AGGL_cluster (df:pd.DataFrame, clusters=8 ):
+    agg = AgglomerativeClustering(n_clusters=clusters )
+    agg_results = agg.fit(df)
+
+    df['cluster'] = agg_results.labels_
+
+    return df
+
+
+
 
 # Carries out random forest regressor after splitting for training and testing
 def RF_train_test (preprocessed_df: pd.DataFrame, prediction_col:str, randomizer:str = None):

@@ -1,6 +1,8 @@
 import pandas as pd
 import plotly.express as px
 import plotly.io as pio
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def scatter_plot(df:pd.DataFrame, labels:list, color_col:str, 
                  title="Scatter Plot", 
@@ -34,7 +36,7 @@ def bar_plot(df:pd.DataFrame, labels:list,
                  format="png"):
 
     # Create a scatter plot using Plotly Express
-    fig = px.bar(df, x=labels[0], y=labels[1], color="viridis", title=title)
+    fig = px.bar(df, x=labels[0], y=labels[1], title=title)
 
     # Update layout (optional)
     fig.update_layout(
@@ -52,4 +54,16 @@ def bar_plot(df:pd.DataFrame, labels:list,
 
     if save_loc != "./":
         pio.write_image(fig, f"{save_loc}/{title}.{format}", format=f'{format}')
-    
+
+#Correlation matrix 
+def corr_mx(pandas_df:pd.DataFrame):
+    #Calculates correlation scores
+    correlation_matrix = pandas_df.corr()
+    # Create correlation matrix plot
+    plt.figure(figsize=(12, 10))
+    sns.heatmap(correlation_matrix, annot=True, cmap='YlGnBu', fmt=".2f", linewidths=.5)
+    plt.show()
+
+
+def summary_plot(df:pd.DataFrame):
+    pass
