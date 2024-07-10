@@ -1,5 +1,6 @@
 import pandas as pd
-import plotly.express as px
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.manifold import TSNE
 from umap import UMAP
 from sklearn.cluster import DBSCAN, KMeans, AgglomerativeClustering
@@ -14,10 +15,17 @@ def TSNE_reduction (df: pd.DataFrame, rng=42 ):
     # Apply t-SNE transformation to the DataFrame
     tsne_results = tsne.fit_transform(df)
     df_tsne = pd.DataFrame(tsne_results, columns=['tsne1', 'tsne2'])
-    
-    # Plots and ouputs figures 
-    fig = px.scatter(df_tsne, x='tsne1', y='tsne2', title='t-SNE Visualization')
-    fig.show()
+
+    plt.figure(figsize=(10, 6))
+    scatter = sns.scatterplot(data=df_tsne, x='tsne1', y='tsne2',palette="pastel")
+
+    # Update layout (optional)
+    scatter.set_title('t-SNE Visualization', fontsize=16)
+    scatter.set_xlabel('tsne1', fontsize=14)
+    scatter.set_ylabel('tsne2', fontsize=14)
+
+    # Show and save the plot
+    plt.show()
 
     return df_tsne 
 
@@ -30,8 +38,16 @@ def UMAP_reduction (df: pd.DataFrame, rng=42 ):
     df_umap = pd.DataFrame(umap_results, columns=['umap1', 'umap2'])
     
     # Plots and ouputs figures 
-    fig = px.scatter(df_umap, x='umap1', y='umap2', title='UMAP Visualization')
-    fig.show()
+    plt.figure(figsize=(10, 6))
+    scatter = sns.scatterplot(data=df_umap, x='umap1', y='umap2',palette="pastel")
+
+    # Update layout (optional)
+    scatter.set_title('UMAP Visualization', fontsize=16)
+    scatter.set_xlabel('umap1', fontsize=14)
+    scatter.set_ylabel('umap2', fontsize=14)
+
+    # Show and save the plot
+    plt.show()
 
     return df_umap
 

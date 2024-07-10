@@ -1,59 +1,54 @@
 import pandas as pd
-import plotly.express as px
-import plotly.io as pio
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-def scatter_plot(df:pd.DataFrame, labels:list, color_col:str, 
+def scatter_plot(df: pd.DataFrame, labels: list, color_col: str, 
                  title="Scatter Plot", 
                  save_loc = "./",
                  format="png"):
 
-    # Create a scatter plot using Plotly Express
-    fig = px.scatter(df, x=labels[0], y=labels[1], color=color_col, title=title)
+    # Create a scatter plot using Seaborn
+    plt.figure(figsize=(10, 6))
+    scatter = sns.scatterplot(data=df, x=labels[0], y=labels[1], hue=color_col)
 
     # Update layout (optional)
-    fig.update_layout(
-        xaxis_title=labels[0],
-        yaxis_title=labels[1],
-        font=dict(
-            family='Arial',
-            size=12,
-            color='black'
-        )
-    )
+    scatter.set_title(title, fontsize=16)
+    scatter.set_xlabel(labels[0], fontsize=14)
+    scatter.set_ylabel(labels[1], fontsize=14)
+    scatter.legend(title=color_col)
 
-    # Show and saves the plot
-    fig.show()
+    # Show and save the plot
+    plt.show()
 
     if save_loc != "./":
-        pio.write_image(fig, f"{save_loc}/{title}.{format}", format=f'{format}')
-    
+        plt.savefig(f"{save_loc}/{title}.{format}", format=format)
+
+    plt.close()
+
+
+
 
 def bar_plot(df:pd.DataFrame, labels:list, 
                  title="Bar Plot", 
                  save_loc = "./",
                  format="png"):
 
-    # Create a scatter plot using Plotly Express
-    fig = px.bar(df, x=labels[0], y=labels[1], title=title)
+   # Create a scatter plot using Seaborn
+    plt.figure(figsize=(10, 6))
+    scatter = sns.barplot(data=df, x=labels[0], y=labels[1])
 
     # Update layout (optional)
-    fig.update_layout(
-        xaxis_title=labels[0],
-        yaxis_title=labels[1],
-        font=dict(
-            family='Arial',
-            size=12,
-            color='black'
-        )
-    )
+    scatter.set_title(title, fontsize=16)
+    scatter.set_xlabel(labels[0], fontsize=14)
+    scatter.set_ylabel(labels[1], fontsize=14)
 
-    # Show and saves the plot
-    fig.show()
+    # Show and save the plot
+    plt.show()
 
     if save_loc != "./":
-        pio.write_image(fig, f"{save_loc}/{title}.{format}", format=f'{format}')
+        plt.savefig(f"{save_loc}/{title}.{format}", format=format)
+
+    plt.close()
 
 #Correlation matrix 
 def corr_mx(pandas_df:pd.DataFrame):
