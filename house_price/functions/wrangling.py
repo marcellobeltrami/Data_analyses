@@ -34,7 +34,8 @@ def preprocessing(df):
         scalings_num[num] = scaled_values.flatten()
         num_scalers[num] = rs
 
-    return preprocessed_df, encodings_cat, label_encoders, num_scalers
+    
+    return preprocessed_df.dropna(), encodings_cat, label_encoders, num_scalers
 
 # Function to decode categorical columns
 def decode_column(encoded_df: pd.DataFrame, column: str, label_encoder: LabelEncoder):
@@ -42,6 +43,13 @@ def decode_column(encoded_df: pd.DataFrame, column: str, label_encoder: LabelEnc
     return decoded_column
 
 
+# Concatenates dataframe by accordingly resetting indecies.
+def c_concatenate(df1, df2): 
+    df_1 = df1.reset_index(drop=True)
+    df_2= df2.reset_index(drop=True)
 
+    combined_df = pd.concat([df_1, df_2], axis=1, join='outer')
+
+    return combined_df
 
 

@@ -61,4 +61,9 @@ def corr_mx(pandas_df:pd.DataFrame):
 
 
 def summary_plot(df:pd.DataFrame):
-    pass
+    #Calculates correlation scores
+    pairplot = sns.pairplot(df)
+    # Create correlation matrix plot
+    plt.figure(figsize=(12, 10))
+    sns.heatmap(pairplot, annot=True, cmap='YlGnBu', fmt=".2f", linewidths=.5)
+    plt.show()
