@@ -55,6 +55,7 @@ The top payed person is a director.
 
 Furthermore, it can be inferred that age play a important role in salary earning, which is in line with what found with Gini scoring.""")
 
+
 st.title("Conclusions and applications")
 
 st.write(""" 

@@ -5,7 +5,7 @@ import streamlit as st
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox(
     "Choose a page",
-    ["Home", "Salaries analysis", "Page 2", "Page 3", "Page 4"],
+    ["Home", "Salaries analysis", ],
 )
 
 # Import pages dynamically based on selection
